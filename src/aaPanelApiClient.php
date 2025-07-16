@@ -84,7 +84,7 @@ class aaPanelApiClient
      */
     public function fetchLogs()
     {
-        $url = $this->baseUrl . '/data?action=getData';
+        $url = $this->baseUrl . '/v2/data?action=getData';
 
         $requestData = $this->generateRequestData();
         $requestData['table'] = 'logs';
@@ -185,7 +185,7 @@ class aaPanelApiClient
      */
     public function addSubdomain($subdomain, $mainDomain, $ipTarget)
     {
-        $url = $this->baseUrl . '/plugin?action=a&name=dns_manager&s=act_resolve';
+        $url = $this->baseUrl . '/v2/plugin?action=a&name=dns_manager&s=act_resolve';
 
         $requestData = $this->generateRequestData();
         $requestData['host'] = $subdomain;
@@ -210,7 +210,7 @@ class aaPanelApiClient
      */
     public function deleteSubdomain($subdomain, $mainDomain, $ipTarget)
     {
-        $url = $this->baseUrl . '/plugin?action=a&name=dns_manager&s=act_resolve';
+        $url = $this->baseUrl . '/v2/plugin?action=a&name=dns_manager&s=act_resolve';
 
         $requestData = $this->generateRequestData();
         $requestData['host'] = $subdomain;
@@ -232,7 +232,7 @@ class aaPanelApiClient
      */
     public function fetchFtpAccounts($limit, $page, $search = null)
     {
-        $url = $this->baseUrl . '/data?action=getData';
+        $url = $this->baseUrl . '/v2/data?action=getData';
 
         $requestData = $this->generateRequestData();
         $requestData['table'] = 'ftps';
@@ -255,7 +255,7 @@ class aaPanelApiClient
      */
     public function addFtpAccount($username, $password,$path,$ps = null)
     {
-        $url = $this->baseUrl . '/ftp?action=AddUser';
+        $url = $this->baseUrl . '/v2/ftp?action=AddUser';
 
         $requestData = $this->generateRequestData();
         $requestData['ftp_username'] = $username;
@@ -277,7 +277,7 @@ class aaPanelApiClient
      */
     public function deleteFtpAccount($username,$id)
     {
-        $url = $this->baseUrl . '/ftp?action=DeleteUser';
+        $url = $this->baseUrl . '/v2/ftp?action=DeleteUser';
 
         $requestData = $this->generateRequestData();
         $requestData['username'] = $username;
@@ -299,7 +299,7 @@ class aaPanelApiClient
      */
     public function importSqlFile($file, $databaseName)
     {
-        $url = $this->baseUrl . '/database?action=InputSql';
+        $url = $this->baseUrl . '/v2/database?action=InputSql';
 
         $requestData = $this->generateRequestData();
         $requestData['file'] = $file;
@@ -319,7 +319,7 @@ class aaPanelApiClient
      */
     public function saveFile($fileContent, $path)
     {
-        $url = $this->baseUrl . '/files?action=SaveFileBody';
+        $url = $this->baseUrl . '/v2/files?action=SaveFileBody';
 
         $requestData = $this->generateRequestData();
         $requestData['data'] = $fileContent;
@@ -341,7 +341,7 @@ class aaPanelApiClient
      */
     public function unzipFile($sourceFile, $destination, $password = null)
     {
-        $url = $this->baseUrl . '/files?action=UnZip';
+        $url = $this->baseUrl . '/v2/files?action=UnZip';
 
         $requestData = $this->generateRequestData();
         $requestData['sfile'] = $sourceFile;
@@ -365,8 +365,8 @@ class aaPanelApiClient
      */
     public function applySslCertificate($domain, $domainId, $autoWildcard = 0)
     {
-        $applyCertUrl = $this->baseUrl . '/acme?action=apply_cert_api';
-        $setSslUrl = $this->baseUrl . '/site?action=SetSSL';
+        $applyCertUrl = $this->baseUrl . '/v2/acme?action=apply_cert_api';
+        $setSslUrl = $this->baseUrl . '/v2/site?action=SetSSL';
 
         // Apply certificate
         $applyCertData = $this->generateRequestData();
@@ -583,7 +583,7 @@ class aaPanelApiClient
      */
     public function enableHttpsRedirection($siteName)
     {
-        $url = $this->baseUrl . '/site?action=HttpToHttps';
+        $url = $this->baseUrl . '/v2/site?action=HttpToHttps';
 
         $requestData = $this->generateRequestData();
         $requestData['siteName'] = $siteName;
@@ -602,7 +602,7 @@ class aaPanelApiClient
      */
     public function disableSite($siteId, $siteName)
     {
-        $url = $this->baseUrl . '/site?action=SiteStop';
+        $url = $this->baseUrl . '/v2/site?action=SiteStop';
 
         $requestData = $this->generateRequestData();
         $requestData['id'] = $siteId;
@@ -622,7 +622,7 @@ class aaPanelApiClient
      */
     public function enableSite($siteId, $siteName)
     {
-        $url = $this->baseUrl . '/site?action=SiteStart';
+        $url = $this->baseUrl . '/v2/site?action=SiteStart';
 
         $requestData = $this->generateRequestData();
         $requestData['id'] = $siteId;
@@ -641,7 +641,7 @@ class aaPanelApiClient
      */
     public function getFtpAccountDetails($username)
     {
-        $url = $this->baseUrl . '/ftp?action=GetUser';
+        $url = $this->baseUrl . '/v2/ftp?action=GetUser';
 
         $requestData = $this->generateRequestData();
         $requestData['user'] = $username;
@@ -659,7 +659,7 @@ class aaPanelApiClient
      */
     public function setServerConfig($configData)
     {
-        $url = $this->baseUrl . '/server?action=setConfig';
+        $url = $this->baseUrl . '/v2/server?action=setConfig';
 
         $requestData = $this->generateRequestData();
         $requestData['config'] = json_encode($configData);
@@ -676,7 +676,7 @@ class aaPanelApiClient
      */
     public function getServerConfig()
     {
-        $url = $this->baseUrl . '/server?action=getConfig';
+        $url = $this->baseUrl . '/v2/server?action=getConfig';
 
         $requestData = $this->generateRequestData();
 
@@ -737,7 +737,7 @@ class aaPanelApiClient
      */
     public function fetchDirectory($path, $page, $showRow = 100)
     {
-        $url = $this->baseUrl . '/files?action=GetDir';
+        $url = $this->baseUrl . '/v2/files?action=GetDir';
 
         $requestData = $this->generateRequestData();
         $requestData['path'] = $path;
@@ -758,7 +758,7 @@ class aaPanelApiClient
      */
     public function downloadFile($url,$path, $filename)
     {
-        $url = $this->baseUrl . '/files?action=DownloadFile';
+        $url = $this->baseUrl . '/v2/files?action=DownloadFile';
 
         $requestData = $this->generateRequestData();
         $requestData['url'] = $url;
@@ -776,7 +776,7 @@ class aaPanelApiClient
      */
     public function getFileBody($path)
     {
-        $url = $this->baseUrl . '/files?action=GetFileBody';
+        $url = $this->baseUrl . '/v2/files?action=GetFileBody';
 
         $requestData = $this->generateRequestData();
         $requestData['path'] = $path;
@@ -791,7 +791,7 @@ class aaPanelApiClient
      */
     public function uploadFile($localPath,$path, $filename)
     {
-        $url = $this->baseUrl . '/files?action=DownloadFile';
+        $url = $this->baseUrl . '/v2/files?action=DownloadFile';
 
         $filesize = filesize($localPath);
 
