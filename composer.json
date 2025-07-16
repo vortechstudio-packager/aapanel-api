@@ -2,7 +2,7 @@
     "name": "alfikripayakumbuh/aapanel-api",
     "description": "API Client AAPanel with PHP Version 7.0.21 or higher",
     "type": "library",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "php": "^8.0"
     },
