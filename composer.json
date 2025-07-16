@@ -2,6 +2,7 @@
     "name": "alfikripayakumbuh/aapanel-api",
     "description": "API Client AAPanel with PHP Version 7.0.21 or higher",
     "type": "library",
+    "version": "1.0.0",
     "require": {
         "php": "^8.0"
     },
@@ -20,5 +21,5 @@
             "email": "belintex8@gmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
