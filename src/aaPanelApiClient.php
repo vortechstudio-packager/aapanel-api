@@ -156,7 +156,7 @@ class aaPanelApiClient
         $result = $this->httpPostWithCookie($url, $requestData);
         $result = json_decode($result, true);
 
-        if($runPath !== null) {
+        if($runPath !== null && $result['message']['siteId']) {
             $this->updateRunPath($result['message']['siteId'], $runPath);
         }
 
@@ -169,6 +169,48 @@ class aaPanelApiClient
         $requestData = $this->generateRequestData();
         $requestData['id'] = $id;
         $requestData['runPath'] = $runPath;
+
+        $result = $this->httpPostWithCookie($url, $requestData);
+
+        return json_decode($result, true);
+    }
+
+    /**
+     * check run path.
+     *
+     * @param string $domain Path to check
+     * @return array Response from the API
+     */
+    public function checkRunPath($domain) {
+        $response = $this->fetchSites(limit: 20, page: 1, search: $domain);
+
+        if (isset($response['message']['data']) && is_array($response['message']['data']) && $response['message']['data'] != []) {
+            foreach ($response['message']['data'] as $item) {
+                if (isset($item['name']) && $item['name'] == $domain) {
+                    $url = $this->baseUrl . '/v2/site?action=GetDirUserINI';
+
+                    $requestData = $this->generateRequestData();
+                    $requestData['id'] = $item['id'];
+                    $requestData['path'] = $item['path'];
+
+                    $result = $this->httpPostWithCookie($url, $requestData);
+
+                    return json_decode($result, true);
+                }
+            }
+        } else {
+            // Jika tidak ada data, tambahkan entri kosong
+            return [
+                'message' => 'Website is not found',
+                'status' => -1,
+            ];
+        }
+
+        $url = $this->baseUrl . '/v2/site?action=GetDirUserINI';
+
+        $requestData = $this->generateRequestData();
+        $requestData['id'] = $id;
+        $requestData['path'] = $runPath;
 
         $result = $this->httpPostWithCookie($url, $requestData);
 

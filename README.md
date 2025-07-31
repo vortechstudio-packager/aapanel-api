@@ -10,6 +10,7 @@ A PHP client library for interacting with the aaPanel API.
 - Fetch logs from the API.
 - Add a new site.
 - Update a run path site.
+- Check a run path site
 - Add a subdomain.
 - Delete a subdomain.
 - Fetch list of FTP accounts.
@@ -63,7 +64,7 @@ var_dump($logs);
 ### Adds a new site to aaPanel.
 
 ```php
-$response = $client->addSite(domain: 'example.com', path: '/home/project', runPath='/public', ssl: 1);
+$response = $client->addSite(domain: 'example.com', path: '/home/project', runPath='/public', type: 2, phpVersion: '84', setSsl: 1);
 var_dump($response);
 ```
 
@@ -72,6 +73,14 @@ var_dump($response);
 
 ```php
 $response = $client->updateRunPath(id: '123', runPath='/public');
+var_dump($response);
+```
+
+## Check a run path site
+### Check run path site domain.
+
+```php
+$response = $client->checkRunPath(domain: 'example.com');
 var_dump($response);
 ```
 
@@ -124,7 +133,7 @@ var_dump($response);
 ### Applies an SSL certificate to a domain.
 
 ```php
-$response = $client->applySslCertificate('example.com', 1, 0);
+$response = $client->applySslCertificate(domain: 'example.com', domainId: 123, $autoWildcard: 0);
 var_dump($response);
 ```
 
