@@ -97,6 +97,26 @@ class aaPanelApiClient
     }
 
     /**
+     * Fetch databases from the API.
+     *
+     * @return array Databases data
+     */
+    public function fetchDatabases(int $limit = 10, int $page = 1, ?string $search = null)
+    {
+        $url = $this->baseUrl . '/v2/data?action=getData';
+
+        $requestData = $this->generateRequestData();
+        $requestData['table'] = 'databases';
+        $requestData['limit'] = $limit;
+        $requestData['p'] = $page;
+        $requestData['search'] = $search;
+
+        $result = $this->httpPostWithCookie($url, $requestData);
+
+        return json_decode($result, true);
+    }
+
+    /**
      * Add a new site.
      *
      * @param string $domain Domain name
